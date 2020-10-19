@@ -81,6 +81,7 @@ namespace ReportViewerForMvc.Tests
             TestWellformedHtmlCustomAttributes(htmlString);
         }
 
+#if REPORTING_SERVICES
         [TestMethod]
         public void ReportViewer_WithAnonymousServerReport()
         {
@@ -104,6 +105,7 @@ namespace ReportViewerForMvc.Tests
 
             TestWellformedHtmlCustomAttributes(htmlString);
         }
+#endif
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -140,12 +142,14 @@ namespace ReportViewerForMvc.Tests
             htmlHelper.ReportViewer(TestData.AnonymousLocalReportViewer, TestData.AnonymousLocalReport, TestData.IncorrectData, null);
         }
 
+#if REPORTING_SERVICES
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void ReportViewer_WithMalformedAnonymousParameters_ServerReport()
         {
             htmlHelper.ReportViewer(TestData.AnonymousServerReportViewer, TestData.AnonymousServerReport, TestData.IncorrectData, null);
         }
+#endif
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -154,9 +158,9 @@ namespace ReportViewerForMvc.Tests
             htmlHelper.ReportViewer(TestData.AnonymousLocalReportViewer, TestData.AnonymousLocalReport, null, TestData.IncorrectData, null);
         }
 
-        #endregion
+#endregion
 
-        #region PrivateMethods
+#region PrivateMethods
 
         private void TestWellformedHtmlDefaultAttributes(HtmlString htmlString)
         {
@@ -209,6 +213,6 @@ namespace ReportViewerForMvc.Tests
             );
         }
 
-        #endregion
+#endregion
     }
 }

@@ -45,6 +45,7 @@ namespace ReportViewerForMvc.Tests
             TestDataSources(testData.AnonymousDataSourceList, reportViewer.LocalReport.DataSources);
         }
 
+#if REPORTING_SERVICES
         [TestMethod]
         public void AnonymousReportViewer_WithServerReport()
         {
@@ -61,6 +62,7 @@ namespace ReportViewerForMvc.Tests
             TestObjects(TestData.AnonymousServerReport, reportViewer.ServerReport);
             TestParameters(TestData.AnonymousServerParameters, reportViewer.ServerReport.GetParameters());
         }
+#endif
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -104,12 +106,14 @@ namespace ReportViewerForMvc.Tests
             ReportViewerForMvc.AnonymousReportViewer(TestData.AnonymousLocalReportViewer, TestData.AnonymousLocalReport, TestData.IncorrectData);
         }
 
+#if REPORTING_SERVICES
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void AnonymousReportViewer_WithMalformedParameters_ServerReport()
         {
             ReportViewerForMvc.AnonymousReportViewer(TestData.AnonymousServerReportViewer, TestData.AnonymousServerReport, TestData.IncorrectData);
         }
+#endif
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -118,7 +122,7 @@ namespace ReportViewerForMvc.Tests
             ReportViewerForMvc.AnonymousReportViewer(TestData.AnonymousLocalReportViewer, TestData.AnonymousLocalReport, null, TestData.IncorrectData);
         }
 
-        #region privateMethods
+#region privateMethods
 
         private void TestObjects(object expected, object actual)
         {
@@ -189,6 +193,6 @@ namespace ReportViewerForMvc.Tests
             }
         }
 
-        #endregion
+#endregion
     }
 }

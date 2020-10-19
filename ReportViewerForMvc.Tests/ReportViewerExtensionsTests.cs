@@ -11,6 +11,7 @@ namespace ReportViewerForMvc.Tests
     {
         TestData testData = new TestData();
 
+#if REPORTING_SERVICES
         [TestMethod]
         public void SetProperties_WithReportViewer()
         {
@@ -19,6 +20,7 @@ namespace ReportViewerForMvc.Tests
 
             CompareReportViewer(testData.ReportViewerTests, reportViewer);
         }
+#endif
 
         [TestMethod]
         public void SetProperties_WithLocalReport()
@@ -29,6 +31,7 @@ namespace ReportViewerForMvc.Tests
             CompareLocalReport(testData.ReportViewerTests.LocalReport, localReport);
         }
 
+#if REPORTING_SERVICES
         [TestMethod]
         public void SetProperties_WithServerReport()
         {
@@ -37,24 +40,25 @@ namespace ReportViewerForMvc.Tests
 
             CompareServerReport(testData.ReportViewerTests.ServerReport, serverReport);
         }
+#endif
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SetProperties_WithNullReportViewerIntance()
+        public void SetProperties_WithNullReportViewerInstance()
         {
             ReportViewerExtensions.SetProperties(null, testData.ReportViewerTests);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SetProperties_WithNullLocalReportIntance()
+        public void SetProperties_WithNullLocalReportInstance()
         {
             ReportViewerExtensions.SetProperties(null, testData.ReportViewerTests.LocalReport);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SetProperties_WithNullServerReportIntance()
+        public void SetProperties_WithNullServerReportInstance()
         {
             ReportViewerExtensions.SetProperties(null, testData.ReportViewerTests.ServerReport);
         }
