@@ -133,10 +133,12 @@ namespace ReportViewerForMvc.Tests
             ReportViewerTests.LocalReport.DataSources.Add(new ReportDataSource("ReportViewerForMvcTestsReport2", dataList));
             ReportViewerTests.LocalReport.SetParameters(ReportParameterList);
 
+#if REPORTING_SERVICES
             //ServerReport properties
             ReportViewerTests.ServerReport.ReportPath = ServerReportPath;
             ReportViewerTests.ServerReport.ReportServerUrl = new Uri(ReportServerUrl);
             ReportViewerTests.ServerReport.SetParameters(GetParametersServer());
+#endif
 
             //Set anonymous DataSource
             AnonymousDataSourceList = new[]
@@ -152,11 +154,13 @@ namespace ReportViewerForMvc.Tests
             };
         }
 
+#if REPORTING_SERVICES
         private ReportParameter[] GetParametersServer()
         {
             ReportParameter p1 = new ReportParameter("ShowBingMaps", "Visible");
             ReportParameter p2 = new ReportParameter("ShowAll", "True");
             return new ReportParameter[] { p1, p2 };
         }
+#endif
     }
 }
